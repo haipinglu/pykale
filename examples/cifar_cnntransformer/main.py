@@ -1,6 +1,8 @@
 """
-Author: Raivo Koot
-Initial Date: 17 July 2020
+This example demonstrates the use of a CNN and a Transformer-Encoder
+for image classification on CIFAR10.
+
+Reference: See kale.embed.attention_cnn for more details.
 """
 import os
 import argparse
@@ -13,9 +15,8 @@ from torchsummary import summary
 
 from config import get_cfg_defaults
 from model import get_model
-from loaddata import construct_dataset
-from model import get_model
 from trainer import Trainer
+from kale.loaddata.cifar_access import get_cifar
 
 import kale.utils.logger as logging
 import kale.utils.seed as seed
@@ -49,7 +50,7 @@ def main():
     logger.info('\n' + cfg.dump())
 
     # ---- setup dataset ----
-    train_loader, val_loader = construct_dataset(cfg)
+    train_loader, val_loader = get_cifar(cfg)
 
     # ---- setup model ----
     print('==> Building model..')

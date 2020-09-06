@@ -23,8 +23,7 @@ from kale.utils.seed import set_seed
 
 
 def arg_parse():
-    """Parsing arguments
-    """
+    """Parsing arguments"""
     parser = argparse.ArgumentParser(description='Domain Adversarial Networks on Digits Datasets')
     parser.add_argument('--cfg', required=True, help='path to config file', type=str)
     parser.add_argument('--gpus', default='0', help='gpu id(s) to use', type=str)
@@ -32,10 +31,8 @@ def arg_parse():
     args = parser.parse_args()
     return args
 
-
 def main():
-    """The main for this domain adapation example, showing the workflow
-    """
+    """The main for this domain adapation example, showing the workflow"""
     args = arg_parse()
     
     # ---- setup configs ----
@@ -59,7 +56,7 @@ def main():
     for i in range(0, cfg.DATASET.NUM_REPEAT):
         seed = cfg.SOLVER.SEED + i*10
         set_seed(seed) # seed_everything in pytorch_lightning did not set torch.backends.cudnn                                    
-        print('==> Building model for seed ' + str(seed) + ' ......')      
+        print(f'==> Building model for seed {seed} ......')   
         # ---- setup model and logger ----                                                     
         model, train_params = get_model(cfg, dataset, num_channels)
         logger, results, checkpoint_callback, test_csv_file = setup_logger(train_params, 
