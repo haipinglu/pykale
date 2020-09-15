@@ -7,6 +7,8 @@ import numpy as np
 
 # Results can be software/hardware-dependent
 # Exactly reproduciable results are expected only on the same software and hardware
+
+
 def set_seed(seed=1000):
     """Sets the seed for generating random numbers to get (as) reproducible (as possible) results.
 

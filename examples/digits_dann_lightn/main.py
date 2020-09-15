@@ -11,15 +11,16 @@ import logging
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from kale.utils.csv_logger import setup_logger # np error if move this to later, not sure why
+from kale.utils.csv_logger import setup_logger  # np error if move this to later, not sure why
 import torch
 import pytorch_lightning as pl
 
-from config import get_cfg_defaults
+from pacs_config import get_cfg_defaults
 from model import get_model
 from kale.loaddata.digits_access import DigitDataset 
 from kale.loaddata.multi_domain import MultiDomainDatasets
 from kale.utils.seed import set_seed
+from kale.loaddata.cv_domain_access import PACSAccess
 
 
 def arg_parse():
@@ -30,6 +31,7 @@ def arg_parse():
     parser.add_argument('--resume', default='', type=str)
     args = parser.parse_args()
     return args
+
 
 def main():
     """The main for this domain adapation example, showing the workflow"""
@@ -46,9 +48,12 @@ def main():
     format_str = "@%(asctime)s %(name)s [%(levelname)s] - (%(message)s)"
     logging.basicConfig(format=format_str)
     # ---- setup dataset ----
-    source, target, num_channels = DigitDataset.get_source_target(DigitDataset(cfg.DATASET.SOURCE.upper()),
-                                                                  DigitDataset(cfg.DATASET.TARGET.upper()),
-                                                                  cfg.DATASET.ROOT)
+    # source, target, num_channels = DigitDataset.get_source_target(DigitDataset(cfg.DATASET.SOURCE.upper()),
+    #                                                               DigitDataset(cfg.DATASET.TARGET.upper()),
+    #                                                               cfg.DATASET.ROOT)
+    num_channels = 3
+    source = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
+    target = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
     dataset = MultiDomainDatasets(source, target, config_weight_type=cfg.DATASET.WEIGHT_TYPE,
                                   config_size_type=cfg.DATASET.SIZE_TYPE)
   

@@ -5,10 +5,11 @@ https://github.com/criteo-research/pytorch-ada/blob/master/adalib/ada/models/mod
 
 import numpy as np
 import torch.nn as nn
-import torch
+# import torch
 from torchvision import models
+# from FeatureExtractorDigits in adalib
 
-#From FeatureExtractorDigits in adalib
+
 class SmallCNNFeature(nn.Module):
     """
     A feature extractor for small 32x32 images (e.g. CIFAR, MNIST) that outputs a feature vector of length 128.

@@ -15,6 +15,7 @@ from datetime import datetime
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 
+
 def param_to_str(param_dict):
     """Convert (hyper)parameter to a string
     """
@@ -34,10 +35,12 @@ def param_to_str(param_dict):
 
     return "-".join(map(key_val_mapper, param_dict.items()))
 
+
 def create_timestamp_string(fmt="%Y-%m-%d.%H.%M.%S.%f"):
     now = datetime.now()
     time_str = now.strftime(fmt)
     return time_str
+
 
 def param_to_hash(param_dict):
     """Generate a hash for a fixed hyperparameter setting
@@ -46,6 +49,7 @@ def param_to_hash(param_dict):
         json.dumps(param_dict, sort_keys=True).encode("utf-8")
     ).hexdigest()
     return config_hash
+
 
 def record_hashes(hash_file, hash_, value):
     """Record the hash and assoicated (training) parameters
@@ -68,6 +72,7 @@ def record_hashes(hash_file, hash_, value):
             fd.write('\n')
         return True
     return False
+
 
 def setup_logger(train_params, output_dir, method_name, seed):
     """[summary]

@@ -58,12 +58,12 @@ class MultiDomainDatasets(DomainsDatasetBase):
         self,
         source_access: DatasetAccess,
         target_access: DatasetAccess,
-        config_weight_type = "natural",
-        config_size_type = DatasetSizeType.Max,
+        config_weight_type="natural",
+        config_size_type=DatasetSizeType.Max,
         val_split_ratio=0.1,
         source_sampling_config=None,
         target_sampling_config=None,
-        n_fewshot = None,
+        n_fewshot=None,
         random_state=None,
     ):
         """The class controlling how the source and target domains are 

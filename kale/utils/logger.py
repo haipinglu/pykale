@@ -7,6 +7,7 @@ import logging
 import datetime
 import subprocess
 
+
 def git_hash():
     """Gets a hash for different runs to have unique logfile names.
     """
