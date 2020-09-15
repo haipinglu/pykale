@@ -10,6 +10,7 @@ from kale.loaddata.usps import USPS
 from kale.loaddata.mnistm import MNISTM
 from kale.loaddata.dataset_access import DatasetAccess
 
+
 class DigitDataset(Enum):
     MNIST = "MNIST"
     MNISTM = "MNISTM"

@@ -1,5 +1,6 @@
 """Screen printing functions, from https://github.com/HaozhiQi/ISONet/blob/master/isonet/utils/misc.py"""
 
+
 def tprint(*args):
     """Temporarily prints things on the screen so that it won't be flooded"""
     print("\r", end="")
