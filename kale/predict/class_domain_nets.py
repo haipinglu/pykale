@@ -10,6 +10,7 @@ import torch.nn as nn
 import torch
 from torchvision import models
 
+
 # Previously FFSoftmaxClassifier
 class SoftmaxNet(nn.Module):
     """Regular and domain classifier network for regular-size images
@@ -62,6 +63,7 @@ class SoftmaxNet(nn.Module):
     def n_classes(self):
         return self._n_classes
 
+
 # Previously DataClassifierDigits
 class ClassNetSmallImage(nn.Module):
     """Regular classifier network for small-size images
@@ -90,6 +92,7 @@ class ClassNetSmallImage(nn.Module):
         x = self.relu2(self.bn2(self.fc2(x)))
         x = self.fc3(x)
         return x
+
 
 # Previously DomainClassifierDigits
 class DomainNetSmallImage(nn.Module):

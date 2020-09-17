@@ -15,6 +15,7 @@ from kale.utils.csv_logger import setup_logger  # np error if move this to later
 import torch
 import pytorch_lightning as pl
 
+# from config import get_cfg_defaults
 from pacs_config import get_cfg_defaults
 from model import get_model
 from kale.loaddata.digits_access import DigitDataset 
@@ -48,12 +49,14 @@ def main():
     format_str = "@%(asctime)s %(name)s [%(levelname)s] - (%(message)s)"
     logging.basicConfig(format=format_str)
     # ---- setup dataset ----
-    # source, target, num_channels = DigitDataset.get_source_target(DigitDataset(cfg.DATASET.SOURCE.upper()),
-    #                                                               DigitDataset(cfg.DATASET.TARGET.upper()),
-    #                                                               cfg.DATASET.ROOT)
     num_channels = 3
     source = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
     target = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
+
+    # source, target, num_channels = DigitDataset.get_source_target(DigitDataset(cfg.DATASET.SOURCE.upper()),
+    #                                                               DigitDataset(cfg.DATASET.TARGET.upper()),
+    #                                                               cfg.DATASET.ROOT)
+
     dataset = MultiDomainDatasets(source, target, config_weight_type=cfg.DATASET.WEIGHT_TYPE,
                                   config_size_type=cfg.DATASET.SIZE_TYPE)
   
