@@ -10,10 +10,12 @@ import torch.utils.data
 from kale.loaddata.sampler import get_labels, MultiDataLoader, SamplingConfig
 from kale.loaddata.dataset_access import DatasetAccess 
 
+
 class WeightingType(Enum):
     NATURAL = "natural"
     BALANCED = "balanced"
     PRESET0 = "preset0"
+
 
 class DatasetSizeType(Enum):
     Max = "max"  # size of the biggest dataset
