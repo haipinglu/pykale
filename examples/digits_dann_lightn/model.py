@@ -5,12 +5,10 @@ Define the learning model and configure training parameters.
 # Initial Date: 27 July 2020
 
 from copy import deepcopy
-# from kale.embed.image_cnn import SmallCNNFeature
-from kale.embed.image_cnn import ResNet18Feature
+from kale.embed.image_cnn import SmallCNNFeature
 from kale.predict.class_domain_nets import ClassNetSmallImage, \
                                               DomainNetSmallImage
 import kale.pipeline.domain_adapter as domain_adapter
-
 
 def get_config(cfg):
     """
@@ -48,9 +46,8 @@ def get_config(cfg):
     }
     return config_params
 
-
 # Based on https://github.com/criteo-research/pytorch-ada/blob/master/adalib/ada/utils/experimentation.py
-def get_model(cfg, dataset, num_channels=3):
+def get_model(cfg, dataset, num_channels):
     """
     Builds and returns a model and associated hyperparameters according to the config object passed.
 
@@ -61,8 +58,7 @@ def get_model(cfg, dataset, num_channels=3):
     """
     
     # setup feature extractor
-    # feature_network = SmallCNNFeature(num_channels)
-    feature_network = ResNet18Feature()
+    feature_network = SmallCNNFeature(num_channels)
     # setup classifier
     feature_dim = feature_network.output_size()
     classifier_network = ClassNetSmallImage(feature_dim, cfg.DATASET.NUM_CLASSES)
