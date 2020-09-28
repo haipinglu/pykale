@@ -31,6 +31,7 @@ def arg_parse():
     args = parser.parse_args()
     return args
 
+
 def main():
     """The main for this domain adapation example, showing the workflow"""
     args = arg_parse()
