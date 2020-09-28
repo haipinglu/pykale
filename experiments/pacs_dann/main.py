@@ -8,20 +8,20 @@ import argparse
 import warnings
 import sys
 import logging
+import torch
+import pytorch_lightning as pl
+
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from kale.utils.csv_logger import setup_logger  # np error if move this to later, not sure why
-import torch
-import pytorch_lightning as pl
-
 # from config import get_cfg_defaults
 from pacs_config_ import get_cfg_defaults
 from model import get_model
 from kale.loaddata.digits_access import DigitDataset 
 from kale.loaddata.multi_domain import MultiDomainDatasets
 from kale.utils.seed import set_seed
-from kale.loaddata.cv_domain_access import PACSAccess
+from kale.loaddata.cv_domain_access import PACSMultiAccess
 
 
 def arg_parse():
@@ -50,9 +50,10 @@ def main():
     logging.basicConfig(format=format_str)
     # ---- setup dataset ----
     num_channels = 3
-    source = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
-    target = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
-
+    # source = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
+    # target = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
+    source = PACSMultiAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
+    target = PACSMultiAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
     # source, target, num_channels = DigitDataset.get_source_target(DigitDataset(cfg.DATASET.SOURCE.upper()),
     #                                                               DigitDataset(cfg.DATASET.TARGET.upper()),
     #                                                               cfg.DATASET.ROOT)

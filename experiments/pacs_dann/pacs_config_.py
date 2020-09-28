@@ -20,7 +20,7 @@ _C.DATASET.NAME = 'pacs'  # 'digits'  # dset choices=['office', 'image-clef', 'o
 # _C.DATASET.SOURCE = 'mnist'  # s_dset_path  , help="The source dataset path list"
 # _C.DATASET.TARGET = 'usps'  # s_dset_path  , help="The target dataset path list"
 _C.DATASET.SOURCE = ['cartoon', 'art_painting', 'photo']
-_C.DATASET.TARGET = 'sketch'
+_C.DATASET.TARGET = ['sketch']
 _C.DATASET.NUM_CLASSES = 7
 _C.DATASET.NUM_REPEAT = 10  # 10
 _C.DATASET.DIMENSION = 784
@@ -62,8 +62,7 @@ _C.OUTPUT = CN()
 _C.OUTPUT.ROOT = '/shared/tale2/Shared/szhou/results/pykale/outputs'  # './outputs'  # output_dir
 _C.OUTPUT.VERBOSE = False  # To discuss, for HPC jobs
 _C.OUTPUT.PB_FRESH = 0  # 0 # 50 # 0 to disable  ; MAYBE make it a command line option
-_C.OUTPUT.DIR = os.path.join(_C.OUTPUT.ROOT, _C.DATASET.NAME + '_' +
-                             _C.DATASET.SOURCE + '2' + _C.DATASET.TARGET)
+_C.OUTPUT.DIR = os.path.join(_C.OUTPUT.ROOT, _C.DATASET.NAME + '_rest2' + _C.DATASET.TARGET[0])
 
 
 def get_cfg_defaults():
