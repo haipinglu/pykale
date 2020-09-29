@@ -73,7 +73,7 @@ class PACSMultiAccess(DatasetAccess):
     def get_test(self):
         test_list = []
         for key in self.data_access:
-            test_list.append(self.data_access[key].get_train())
+            test_list.append(self.data_access[key].get_test())
         self.test = ConcatDataset(test_list)
         
         return self.test
