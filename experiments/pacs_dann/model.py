@@ -39,7 +39,8 @@ def get_config(cfg):
         },
         "data_params": {
             "dataset_group": cfg.DATASET.NAME,
-            "dataset_name": cfg.DATASET.SOURCE + '2' + cfg.DATASET.TARGET,
+            # "dataset_name": cfg.DATASET.SOURCE + '2' + cfg.DATASET.TARGET,
+            "dataset_name": 'rest2' + cfg.DATASET.TARGET[0],
             "source": cfg.DATASET.SOURCE,
             "target": cfg.DATASET.TARGET,
             "size_type": cfg.DATASET.SIZE_TYPE,
