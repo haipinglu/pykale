@@ -21,7 +21,7 @@ from model import get_model
 from kale.loaddata.digits_access import DigitDataset 
 from kale.loaddata.multi_domain import MultiDomainDatasets
 from kale.utils.seed import set_seed
-from kale.loaddata.cv_domain_access import PACSMultiAccess
+from kale.loaddata.cv_domain_access import MultiAccess, PACSAccess
 
 
 def arg_parse():
@@ -45,21 +45,22 @@ def main():
     print(cfg)
     
     # ---- setup output ----    
-    os.makedirs(cfg.OUTPUT.DIR, exist_ok=True)
+    # os.makedirs(cfg.OUTPUT.DIR, exist_ok=True)
     format_str = "@%(asctime)s %(name)s [%(levelname)s] - (%(message)s)"
     logging.basicConfig(format=format_str)
     # ---- setup dataset ----
     num_channels = 3
-    # source = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
-    # target = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
-    source = PACSMultiAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE)
-    target = PACSMultiAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET)
+    # source = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.SOURCE[0])
+    # target = PACSAccess(cfg.DATASET.ROOT, cfg.DATASET.TARGET[0])
+    source = MultiAccess(cfg.DATASET.ROOT, cfg.DATASET.NAME, cfg.DATASET.SOURCE)
+    target = MultiAccess(cfg.DATASET.ROOT, cfg.DATASET.NAME, cfg.DATASET.TARGET)
     # source, target, num_channels = DigitDataset.get_source_target(DigitDataset(cfg.DATASET.SOURCE.upper()),
     #                                                               DigitDataset(cfg.DATASET.TARGET.upper()),
     #                                                               cfg.DATASET.ROOT)
 
     dataset = MultiDomainDatasets(source, target, config_weight_type=cfg.DATASET.WEIGHT_TYPE,
                                   config_size_type=cfg.DATASET.SIZE_TYPE)
+    outdir = os.path.join(cfg.OUTPUT.ROOT, cfg.DATASET.NAME + '_rest2' + cfg.DATASET.TARGET[0])
   
     # Repeat multiple times to get std
     for i in range(0, cfg.DATASET.NUM_REPEAT):
@@ -69,7 +70,8 @@ def main():
         # ---- setup model and logger ----                                                     
         model, train_params = get_model(cfg, dataset, num_channels)
         logger, results, checkpoint_callback, test_csv_file = setup_logger(train_params, 
-                                                                           cfg.OUTPUT.DIR, 
+                                                                           # cfg.OUTPUT.DIR,
+                                                                           outdir,
                                                                            cfg.DAN.METHOD, 
                                                                            seed)
         trainer = pl.Trainer(
