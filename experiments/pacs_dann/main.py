@@ -45,7 +45,7 @@ def main():
     print(cfg)
     
     # ---- setup output ----    
-    # os.makedirs(cfg.OUTPUT.DIR, exist_ok=True)
+    os.makedirs(cfg.OUTPUT.DIR, exist_ok=True)
     format_str = "@%(asctime)s %(name)s [%(levelname)s] - (%(message)s)"
     logging.basicConfig(format=format_str)
     # ---- setup dataset ----
