@@ -91,7 +91,6 @@ class VLCSAccess(DatasetAccess):
         return self.test
 
 
-
 class MultiAccess(DatasetAccess):
 
     def __init__(self, data_path, data_name, domains, transform='default', **kwargs):
@@ -103,7 +102,7 @@ class MultiAccess(DatasetAccess):
         domain_list, data_access, _n_class = domain_info[data_name]
         super().__init__(n_classes=_n_class)
         self.data_ = dict()
-        for d in domain_list:
+        for d in domains:
             if d.lower() not in domain_list:
                 print('Invalid target domain')
                 sys.exit()

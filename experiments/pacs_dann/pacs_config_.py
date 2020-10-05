@@ -62,7 +62,7 @@ _C.OUTPUT = CN()
 _C.OUTPUT.ROOT = '/shared/tale2/Shared/szhou/results/pykale/outputs'  # './outputs'  # output_dir
 _C.OUTPUT.VERBOSE = False  # To discuss, for HPC jobs
 _C.OUTPUT.PB_FRESH = 0  # 0 # 50 # 0 to disable  ; MAYBE make it a command line option
-_C.OUTPUT.DIR = os.path.join(_C.OUTPUT.ROOT, _C.DATASET.NAME + '_rest2' + _C.DATASET.TARGET[0])
+# _C.OUTPUT.DIR = os.path.join(_C.OUTPUT.ROOT, _C.DATASET.NAME + '_rest2' + _C.DATASET.TARGET[0])
 
 
 def get_cfg_defaults():
