@@ -61,8 +61,7 @@ class PACSAccess(DatasetAccess):
 class VLCSAccess(DatasetAccess):
 
     def __init__(self, data_path, domain='CALTECH', transform='default'):
-
-        super().__init__(n_class=5)
+        super().__init__(n_classes=5)
         if not os.path.exists(data_path):
             print('Data path \'%s\' does not' % data_path)
             sys.exit()
@@ -103,7 +102,7 @@ class MultiAccess(DatasetAccess):
         super().__init__(n_classes=_n_class)
         self.data_ = dict()
         for d in domains:
-            if d.lower() not in domain_list:
+            if d not in domain_list:
                 print('Invalid target domain')
                 sys.exit()
             self.data_[d] = data_access(data_path, domain=d, transform=transform, **kwargs)

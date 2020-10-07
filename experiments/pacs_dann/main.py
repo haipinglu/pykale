@@ -45,7 +45,9 @@ def main():
     print(cfg)
     
     # ---- setup output ----    
-    os.makedirs(cfg.OUTPUT.DIR, exist_ok=True)
+    outdir = os.path.join(cfg.OUTPUT.ROOT, cfg.DATASET.NAME + '_rest2' + cfg.DATASET.TARGET[0])
+    # os.makedirs(cfg.OUTPUT.DIR, exist_ok=True)
+    os.makedirs(outdir, exist_ok=True)
     format_str = "@%(asctime)s %(name)s [%(levelname)s] - (%(message)s)"
     logging.basicConfig(format=format_str)
     # ---- setup dataset ----
@@ -60,7 +62,6 @@ def main():
 
     dataset = MultiDomainDatasets(source, target, config_weight_type=cfg.DATASET.WEIGHT_TYPE,
                                   config_size_type=cfg.DATASET.SIZE_TYPE)
-    outdir = os.path.join(cfg.OUTPUT.ROOT, cfg.DATASET.NAME + '_rest2' + cfg.DATASET.TARGET[0])
   
     # Repeat multiple times to get std
     for i in range(0, cfg.DATASET.NUM_REPEAT):
